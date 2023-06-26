@@ -10,7 +10,7 @@ def pixelVal(pix, r1, s1, r2, s2):
         return ((255-s2)/(255-r2)) * (pix-r2) + s2
     
 
-img = cv.imread('pics/me.jpg')
+img = cv.imread('pics/me.jpg', cv.IMREAD_GRAYSCALE)
 r1 = 70
 s1 = 0
 r2 = 140
