@@ -1,9 +1,9 @@
 import cv2 as cv
 import numpy as np
 
-img_in = cv.imread('pics/me.jpg', cv.IMREAD_GRAYSCALE)
+img_in = cv.imread('pics/dark.jpg', cv.IMREAD_GRAYSCALE)
 
-gamma = 10
+gamma = 0.5 #if it's dark decrease gamma, but is it's bright increase gamma
 gamma_corrected = (img_in / 255)**gamma
 
 gamma_corrected = gamma_corrected * 255
