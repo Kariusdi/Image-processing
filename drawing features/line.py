@@ -27,7 +27,7 @@ def bresenhamLine(x1, y1, x2, y2):
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
-def A45degLine(startX, startY, endX, endY):
+def Line45deg(startX, startY, endX, endY):
     line = np.zeros((500, 500), dtype=np.uint8)
 
     Setx = []
@@ -65,13 +65,8 @@ def A45degLine(startX, startY, endX, endY):
     cv2.destroyAllWindows()
 
 
-x = [100, 460]
-y = [370, 150]
-# bresenhamLine(x[0], y[0], x[1], y[1])
-A45degLine(x[0], y[0], x[1], y[1])
-
-
-
-
-
-
+if __name__ == '__main__':
+    x = [100, 460]
+    y = [370, 150]
+    # bresenhamLine(x[0], y[0], x[1], y[1])
+    Line45deg(x[0], y[0], x[1], y[1])
