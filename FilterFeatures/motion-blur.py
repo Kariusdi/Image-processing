@@ -5,9 +5,9 @@ from DrawingFeatures import line as Aline
 
 def motionblur(line):
 
-    kernel_size = 15000
+    kernel_size = 150 * 100
     image = cv.imread('pics/meandyou.jpg', 0)
-    kernel = np.zeros((kernel_size, kernel_size))
+    # kernel = np.zeros((kernel_size, kernel_size))
     kernel = line
     kernel = kernel / kernel_size
 
@@ -21,7 +21,7 @@ def motionblur(line):
 
 
 if __name__ == '__main__':
-    StartEnd_x = [70, 20]
+    StartEnd_x = [70, 70]
     StartEnd_y = [10, 50]
     line = Aline.Draw_Line(StartEnd_x[0], StartEnd_y[0], StartEnd_x[1], StartEnd_y[1])
     # line = Draw_bresenhamLine(StartEnd_x[0], StartEnd_y[0], StartEnd_x[1], StartEnd_y[1])
