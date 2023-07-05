@@ -2,34 +2,26 @@ import cv2
 import numpy as np
 from DrawingFeatures import circle
 
-
-def check_pixel_values(image, radius):
-    height, width = image.shape[:2]
-    used_pixels = np.zeros((height, width), dtype=np.uint8)
-    for row in range(height):
-        for col in range(width):
-            pixel_value = image[row, col]
-            if pixel_value == 255 and used_pixels[row, col] == 0 :
+def DrawCircle_WhitePixel(ogImg , filterImg, radius):
+    height, width = filterImg.shape[:2]
+    for row in range(0, height, 3):
+        for col in range(0, width, 3):
+            pixel_value = filterImg[row, col]
+            if pixel_value == 255:
                 print(col, row)
-                circle.Draw_bresenhamCircle(image , col, row, radius)
-                
-                # Set this pixel to be used
-                used_pixels[row-radius:row+radius//2, col-radius:col+radius//2] = 255
+                circle.Draw_bresenhamCircle(ogImg , col, row, radius)
 
 if __name__ == '__main__':              
-    # read image
     img = cv2.imread('pics/CircleObjects.png', 0)
 
     # Reduce image's noise
-    Imgmeanfilter = cv2.medianBlur(img, 5)
+    Imgmeanfilter = cv2.medianBlur(img, 15)
     thresh = cv2.threshold(Imgmeanfilter, 175, 255, cv2.THRESH_BINARY)[1]
+    Circleedge = cv2.Canny(thresh, 200, 255)
 
-    # Check white pixel for drawing
-    check_pixel_values(thresh, 60)
+    DrawCircle_WhitePixel(img, Circleedge, 60)
 
-    # write result to disk
-    cv2.imwrite("pics/CircleCenter.png", thresh)
-    # display it
-    cv2.imshow("IMAGE", img)
-    cv2.imshow("THRESH", thresh)
+    cv2.imwrite("pics/CircleCenter.png", img)
+    cv2.imshow("Filtered", Circleedge)
+    cv2.imshow("Result", img)
     cv2.waitKey(0)

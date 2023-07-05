@@ -39,7 +39,7 @@ def Draw_bresenhamCircle(inputimg, h, k, r):
     center = (h, k)
     radius = r
     # Set the color of the circle
-    color = 180
+    color = 175
     
     x = 0
     y = radius
