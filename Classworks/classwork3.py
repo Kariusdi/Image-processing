@@ -25,21 +25,18 @@ def salt_and_pepper_noise(img, dstSalt, dstPepper):
 
     return img
 
-def find_max_ssim(ogImg, noisyImg):
+def find_max_ssim(noise_free_image, noisy_image):
     quality_range = []
-    ssim_value_og = compare_ssim(ogImg, noisyImg)
+    ssim_value_og = compare_ssim(noise_free_image, noisy_image)
 
     for i in range(3, 10, 2):
-        denoise = cv2.medianBlur(noisyImg, i)
-        ssim_value = compare_ssim(ogImg, denoise)
+        denoise = cv2.medianBlur(noisy_image, i)
+        ssim_value = compare_ssim(noise_free_image, denoise)
         quality_range.append(ssim_value)
     
     return max(quality_range), ssim_value_og
 
-def denoiser(ogImg, noisyImg):
-
-    noise_free_image = ogImg
-    noisy_image = noisyImg
+def denoiser(noise_free_image, noisy_image):
 
     filter_size = 1
     max_quality, ssim_value = find_max_ssim(noise_free_image, noisy_image)
