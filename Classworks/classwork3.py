@@ -75,6 +75,7 @@ if __name__ == '__main__':
     cv2.imwrite('pics/noisy.jpg', noisy)
     
     noise_free_image = cv2.imread('pics/Dogcat.jpg', 0)
+    cv2.imwrite('pics/DogCatGrayscale.jpg', noise_free_image)
     noisy_image = cv2.imread('pics/noisy.jpg', 0)
 
     denoiser(noise_free_image, noisy_image)
