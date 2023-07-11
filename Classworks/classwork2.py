@@ -24,4 +24,5 @@ if __name__ == '__main__':
     cv2.imwrite("pics/CircleCenter.png", img)
     cv2.imshow("Filtered", Circleedge)
     cv2.imshow("Result", img)
-    cv2.waitKey(0)
+    cv2.waitKey(5000)
+    cv2.destroyAllWindows()
