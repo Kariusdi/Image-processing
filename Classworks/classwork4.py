@@ -27,7 +27,7 @@ if __name__ == '__main__':
     
     kernel_length = len(kernel_vert)
 
-    #---------------- Steps of Sobel filter in frequency domain ----------------#
+    #---------------- Steps of Sobel filter in Frequency domain ----------------#
 
     # 1. Pad the kernel to match the size of the Fourier-transformed image
     kernel_pad = np.pad(kernel_vert, ((h // 2 , h // 2 - kernel_length), (w // 2 , w // 2 - kernel_length)), mode='constant')
@@ -44,12 +44,12 @@ if __name__ == '__main__':
 
 
     # 4. Inverse Fourier Transform of the dot product and normalize it
-    img_filtered = np.fft.ifftshift(dotProduct)
-    img_filtered = np.fft.ifft2(img_filtered)
-    filtered = np.real(img_filtered)
-    img_filtered = cv2.normalize(filtered, None, 0, 255, cv2.NORM_MINMAX, cv2.CV_8U)  # Normalize the filtered image
-    cv2.imshow('Frequency domain', img_filtered)
-    cv2.imwrite('outputs/Sobel-Frequency.png', img_filtered)
+    imgF_filtered = np.fft.ifftshift(dotProduct)
+    imgF_filtered = np.fft.ifft2(imgF_filtered)
+    filtered = np.real(imgF_filtered)
+    imgF_filtered = cv2.normalize(filtered, None, 0, 255, cv2.NORM_MINMAX, cv2.CV_8U)  # Normalize the filtered image
+    cv2.imshow('Frequency domain', imgF_filtered)
+    cv2.imwrite('outputs/Sobel-Frequency.png', imgF_filtered)
 
     #---------------------------------- End ----------------------------------#
 
@@ -60,6 +60,8 @@ if __name__ == '__main__':
     cv2.imshow('Spatial domain', sobelX)
     cv2.imwrite('outputs/Sobel-Spatial.png', sobelX)
 
+    compare_pics = np.concatenate((imgF_filtered, sobelX), axis=1)
+    cv2.imshow('Frequency and Spatial domain', compare_pics)
 
     cv2.waitKey(0)
     cv2.destroyAllWindows()
